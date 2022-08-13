@@ -1,10 +1,6 @@
 import pymongo
 import registration as reg
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-db = myclient.testdb
-rec = db.dbase
-
 
 def login(username, password, user_list, pas_list):
     if username in user_list:
@@ -38,6 +34,9 @@ def wrong_option(option):
 def main():
     username = input("Enter your Aadhar Number: ")
     password = input("Enter your Password: ")
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    db = myclient.bankdb
+    rec = db.regdb
     user_list = []
     for details_user in rec.find({"_id": {'$exists': True}}, {'_id:0'}):
         res_user = details_user.values()
