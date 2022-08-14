@@ -13,7 +13,7 @@ def aadhar_val(aadhar,rec):
     if aadhar in user_list:
         print('Aadhar Number already Exists!!')
         aadhar = input('Enter Your Aadhar Number: ')
-        aadhar_val(aadhar)
+        aadhar_val(aadhar,rec)
     else:
         aadhar_valid = val.aadhar_validation(aadhar)
         if len(aadhar) == 14:
@@ -23,11 +23,11 @@ def aadhar_val(aadhar,rec):
             else:
                 print('Invalid Aadhar')
                 aadhar = input('Enter the Valid Aadhar: ')
-                aadhar_val(aadhar)
+                aadhar_val(aadhar,rec)
         else:
             print('Enter the correct length!!')
             aadhar = input('Enter the Valid Aadhar: ')
-            aadhar_val(aadhar)
+            aadhar_val(aadhar,rec)
     return aadhar_result
 
 
@@ -37,7 +37,7 @@ def pas_val(password, re_pas):
     if password == re_pas:
         if pas_valid:
             print('Valid Password Format')
-            pas_result = 
+            pas_result = password
         else:
             password = input('Enter the Password in Correct Format: ')
             pas_val(password, re_pas)
@@ -46,6 +46,7 @@ def pas_val(password, re_pas):
         password = input('Enter the Password:')
         re_pas = input('Re-Enter the Password Again: ')
         pas_val(password, re_pas)
+    return pas_result
 
 
 def pan_val(pan):
@@ -94,15 +95,16 @@ def mail_val(mail):
         print('Invalid Mail Id')
         mail = input('Enter the Valid Mail Id: ')
         mail_val(mail)
-    return mail
+    return mail_result
 
 
 def acnt_val(acnt_type):
-    global 
+    global acnt_result
     acnt_valid = val.acnt_validation(acnt_type)
     if len(acnt_type) == 2:
         if acnt_valid:
             print('Valid Account Type')
+            acnt_result = acnt_type
         else:
             print('Invalid Account Type')
             acnt_type = input('Enter the Valid Account Type: ')
@@ -110,15 +112,18 @@ def acnt_val(acnt_type):
     else:
         acnt_type = input('Enter the Valid Account Type: ')
         acnt_val(acnt_type)
+    return acnt_result
 
 
 def dep_val(deposit):
+    global deposit_result
     if len(deposit) >= 4 and 49 <= ord(deposit[0]) <= 57:
         print('Deposited')
+        deposit_result = deposit
     else:
         deposit = input('Deposit Should be more than 1000, Enter deposit amount: ')
         dep_val(deposit)
-    return deposit
+    return deposit_result
 
 
 def main():
@@ -130,15 +135,15 @@ def main():
     aadhar_final = aadhar_val(aadhar, rec)
     password = input('Enter the Password: ')
     re_pas = input('Re-Enter the Password: ')
-    pas_val(password, re_pas)
+    pas_final = pas_val(password, re_pas)
     pan = input('Enter Your Pan Number: ')
-    pan_val(pan)
+    pan_final = pan_val(pan)
     mobile = input('Enter your Mobile Number: ')
-    mobile_val(mobile)
+    mobile_final = mobile_val(mobile)
     mail = input('Enter your Mail Id: ')
-    mail_val(mail)
+    mail_final = mail_val(mail)
     acnt_type = input('Enter Account Type (SB): ')
-    acnt_val(acnt_type)
+    acnt_final = acnt_val(acnt_type)
     deposit = input('Enter the Amount deposited: ')
     deposit_final = dep_val(deposit)
-    ins.insertion(name, aadhar_final, password, pan, mobile, mail, acnt_type, deposit_final, rec)
+    ins.insertion(name, aadhar_final, pas_final, pan_final, mobile_final, mail_final, acnt_final, deposit_final, rec)
